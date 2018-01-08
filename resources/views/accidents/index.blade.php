@@ -16,9 +16,12 @@
                 background-color: #fff;
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
+                font-weight: 600;   
                 margin: 0;
+            }
+
+            h6 {
+                margin: 15px 0;
             }
 
             .flex-center {
@@ -66,15 +69,15 @@
                 <div class="title m-b-md">
                     Accidents
                     <h6>{{ $mediana_X . " - " . $mediana_Y}}</h6>
-                </div>
 
-                @foreach($accidents as $accident)
-                <div class="col-sm-12">
-                    <p>
-                        <b>{{ $accident->id_nesrece}}</b> (x: {{ $accident->x }} y: {{ $accident->y }})
-                    </p>
+                    <h6>
+                        Borders by X: {{ $coordinate_borders['min_X'] . " : " . $coordinate_borders['max_X'] }}
+                    </h6>
+
+                    <h6>
+                        Borders by Y: {{  $coordinate_borders['min_Y'] . " : " . $coordinate_borders['max_Y'] }}
+                    </h6>
                 </div>
-                @endforeach
 
             </div>
         </div>
