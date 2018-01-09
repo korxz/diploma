@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Nesreca;
+use App\Krajevne_lastnosti;
 use Illuminate\Support\Facades\DB;
 
 class AccidentsController extends Controller
@@ -14,8 +15,7 @@ class AccidentsController extends Controller
                             ->where("y", "<>", 0)
                             ->limit(50000)
                             ->get();
-        $mediana_X = 0;
-        $mediana_Y = 0;
+
         $max_X = 0;
         $max_Y = 0;
         $min_X = 1000;
@@ -27,22 +27,20 @@ class AccidentsController extends Controller
             {
                 $max_X = $accident->x;
             }
-            if ($accident->x < $min_X)
+            elseif ($accident->x < $min_X)
             {
                 $min_X = $accident->x;
             }
 
-            if ($accident->y > $max_Y) 
+            elseif ($accident->y > $max_Y) 
             {
                 $max_Y = $accident->y;
             }
 
-            if ($accident->y < $min_Y)
+            elseif ($accident->y < $min_Y)
             {
                 $min_Y = $accident->y;
             }
-            $mediana_X += $accident->x;
-            $mediana_Y += $accident->y;
         }
 
         $coordinate_borders = array(
@@ -52,9 +50,7 @@ class AccidentsController extends Controller
             "max_Y" => $max_Y
         );
 
-        $mediana_X = $mediana_X / 50000;
-        $mediana_Y = $mediana_Y / 50000;
 
-        return view("accidents.index", compact("accidents", "mediana_X", "mediana_Y", "coordinate_borders"));
+        return view("accidents.index", compact("accidents", "coordinate_borders", "borders"));
     }
 }
