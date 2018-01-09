@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get("/accidents", "AccidentsController@show");
+
+Route::get("/sections", "SectionsController@show");
