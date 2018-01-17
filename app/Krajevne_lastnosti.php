@@ -16,4 +16,9 @@ class Krajevne_lastnosti extends Model
     {
         return $this->hasOne("App\Nesreca");
     }
+
+    public function getSection()
+    {
+        return $this->odsek;
+    }
 }
