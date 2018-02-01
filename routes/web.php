@@ -18,3 +18,25 @@ Route::get('/', function () {
 Route::get("/accidents", "AccidentsController@show");
 
 Route::get("/sections", "SectionsController@show");
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+/*
+ * API 
+ */
+
+ Route::get('api/sections', [
+     'as' => 'api odseki',
+     'uses' => 'SectionsController@apiCall'
+ ]);
+
+ Route::get('api/accidents', [
+     'as' => 'api nesrece',
+     'uses' => 'AccidentsController@apiCall'
+ ]);
+
+ Route::get('api/accidents/{id_nesrece}', [
+     'as' => 'api nesrece {id_nesrece}',
+     'uses' => 'AccidentsController@apiCallOne'
+ ]);
