@@ -1,6 +1,40 @@
 body {
-    font-size: 12px;
-    a {
-        text-decoration: none;
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    margin: 0;
+
+    .links {
+        font-weight: 600;
     }
+
+    nav.links.top-right {
+        a {
+            padding: 5px;
+            text-decoration: none;
+            color: #636b6f;
+        }
+        display: inline-flex;
+    }
+
+    .full-heihgt {
+        height: 100vh;
+    }
+    
+    .flex-center {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .position-ref {
+        position: relative;
+    }
+    
+    .content {
+        text-align: center;
+    }
+    
 }
+
