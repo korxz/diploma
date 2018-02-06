@@ -10,6 +10,6 @@ class Nesreca extends Model
     protected $table = 'nesreca';
     
     protected $fillable = [
-        'klas_nesrece', 'st_ue', 'datum', 'ura', 'x', 'y',
+        'id_nesrece', 'klas_nesrece', 'st_ue', 'datum', 'ura', 'x', 'y',
     ];
 }
