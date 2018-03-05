@@ -9,87 +9,60 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center position-ref">
             @if (Route::has('login'))
-                <div class="top-right links">
+                <nav class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
                     @endauth
-                </div>
+                </nav>
             @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+        </div>
+        <div class="content container">
+            <div class="row">
+                <h1>
+                    Mobilna aplikacija za prikazovanje nevarnih cestnih odsekov
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Zadnja nesreča</h3>
+                    <div id="map"></div>
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="col-sm-6">
+                    <h3>Najbolj nevaren odsek</h3>
+                    <p>{{ $most_dangerous[0]->kraj_nesrece }}</p>
+                    <p>Število nesreč: {{ $most_dangerous[0]->counter }}</p>
                 </div>
             </div>
         </div>
     </body>
 </html>
+
+<script>
+    function initMap() {
+        var x = {!! json_encode($last_x) !!};
+        var y = {!! json_encode($last_y) !!};
+        var last_accident = {lat:  parseInt(x), lng: parseInt(y)};
+        var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 9,
+        center: last_accident
+      });
+      var marker = new google.maps.Marker({
+        position: last_accident,
+        map: map
+      });
+    }
+  </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGymRUv5KQQCjSckgsET9g4BYicyYhDbQ&callback=initMap">
+  </script>
