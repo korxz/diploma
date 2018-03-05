@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+    'as' => 'first page',
+    'uses' => 'GuestController@index'
+]);
 
 Route::get("/accidents", "AccidentsController@show");
 
@@ -26,17 +27,22 @@ Route::get('/home', 'HomeController@index')->name('home');
  * API 
  */
 
- Route::get('api/sections', [
-     'as' => 'api odseki',
-     'uses' => 'SectionsController@apiCall'
- ]);
-
- Route::get('api/accidents', [
+Route::get('api/accidents', [
      'as' => 'api nesrece',
-     'uses' => 'AccidentsController@apiCall'
+     'uses' => 'Api\AccidentsController@index'
  ]);
 
- Route::get('api/accidents/{id_nesrece}', [
+Route::get('api/accidents/{id_nesrece}', [
      'as' => 'api nesrece {id_nesrece}',
-     'uses' => 'AccidentsController@apiCallOne'
+     'uses' => 'Api\AccidentsController@show'
  ]);
+
+Route::get('api/sections', [
+    'as' => 'api odseki',
+    'uses' => 'Api\SectionsController@index'
+]);
+
+Route::get('api/sections/{id_nesrece}', [
+    'as' => 'api odsek {id_nesrece}',
+    'uses' => 'Api\SectionsController@show'
+]);
