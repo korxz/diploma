@@ -53,4 +53,5 @@ class AccidentsController extends Controller
 
         return view("accidents.index", compact("accidents", "coordinate_borders", "borders"));
     }
+
 }

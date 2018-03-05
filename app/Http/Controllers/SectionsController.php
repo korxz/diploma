@@ -16,6 +16,15 @@ class SectionsController extends Controller
                                     ->orderBy("counter", "desc")
                                     ->get();
 
-        return view("sections.index", compact("sections"));
+        $section_locations_basic = array();
+
+        foreach($sections as $s)
+        {
+            if(!in_array($s->getSection(), $section_locations_basic))
+            {
+                array_push($section_locations_basic, $s->getSection());
+            }
+        }
+        return view("sections.index", compact("sections", "section_locations_basic"));
     }
 }
