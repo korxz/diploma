@@ -24,6 +24,6 @@ class AccidentsController
         }
         $accident = Nesreca::where("id_nesrece", "=", $id_nesrece)->get();
 
-        return response()->json(["accident" => $accident], 200);
+        return response()->json(["accident" => $accident], 200);   
     }
 }
