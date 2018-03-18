@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Krajevne_lastnosti;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Nesreca;
 
 class SectionsController
 {
@@ -28,5 +29,23 @@ class SectionsController
         $section = Krajevne_lastnosti::where('id_nesrece', '=', $id_nesrece)->get();
         
         return response()->json(["section" => $section], 200);
+    }
+
+    public function near(Request $request, $x, $y)
+    {
+        $sections = Krajevne_lastnosti::limit(30000)->get();
+        $unorderd_distances = array();
+        foreach($sections as $section)
+        {
+            $distance = $section->near($x, $y);
+            array_push($unorderd_distances, $distance);
+        }
+        sort($unorderd_distances, SORT_NUMERIC);
+        $sliced_array = array_slice($unorderd_distances, 0, 500);
+
+        return response()->json(            	
+            ["distance" => $sliced_array],
+             200
+        );
     }
 }
