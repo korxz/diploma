@@ -28,21 +28,26 @@ Route::get('/home', 'HomeController@index')->name('home');
  */
 
 Route::get('api/accidents', [
-     'as' => 'api nesrece',
+     'as' => 'api accidents',
      'uses' => 'Api\AccidentsController@index'
  ]);
 
 Route::get('api/accidents/{id_nesrece}', [
-     'as' => 'api nesrece {id_nesrece}',
+     'as' => 'api accident {id_nesrece}',
      'uses' => 'Api\AccidentsController@show'
  ]);
 
 Route::get('api/sections', [
-    'as' => 'api odseki',
+    'as' => 'api sections',
     'uses' => 'Api\SectionsController@index'
 ]);
 
 Route::get('api/sections/{id_nesrece}', [
-    'as' => 'api odsek {id_nesrece}',
+    'as' => 'api section {id_nesrece}',
     'uses' => 'Api\SectionsController@show'
+]);
+
+Route::get('api/sectionsnear/x={x}&y={y}', [
+    'as' => 'api nearest accidents',
+    'uses' => 'Api\SectionsController@near'
 ]);
